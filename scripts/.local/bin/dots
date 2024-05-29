@@ -1,0 +1,8 @@
+#!/bin/sh
+
+cd ~/dotfiles/
+case $1 in
+  install) brew bundle;;
+  config) stow */ --no-folding;;
+  *) brew bundle; stow */ --no-folding;;
+esac

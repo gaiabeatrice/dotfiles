@@ -1,0 +1,10 @@
+session: ${name}
+root: ${root}
+
+windows:
+  - name: " "
+    commands:
+      - nvim
+  - name: " "
+    commands:
+      - clear

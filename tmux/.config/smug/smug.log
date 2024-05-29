@@ -1,0 +1,14 @@
+tmux has-session -t PORTAL:
+exit status 1 can't find session: PORTAL
+
+/bin/sh -c docker-compose --project-directory ../devops/local-dev --profile portal up -d
+/bin/sh -c docker-compose up -d
+exit status 1 time="2024-05-28T11:27:27-06:00" level=warning msg="The \"DOCKER_USER\" variable is not set. Defaulting to a blank string."
+ Container portal-postgres  Creating
+Error response from daemon: Conflict. The container name "/portal-postgres" is already in use by container "4dd12293c3c7e0610f6da74d31ecae7a3e2de1b6df39f54e347dedbd5e92142a". You have to remove (or rename) that container to be able to reuse that name.
+
+/bin/sh -c docker-compose --project-directory ../devops/local-dev stop
+/bin/sh -c docker-compose stop
+tmux kill-session -t PORTAL
+exit status 1 can't find session: PORTAL
+

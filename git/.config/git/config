@@ -1,0 +1,14 @@
+[user]
+	name = Gaia Beatrice
+	email = gaiabeatrice@gmail.com
+[commit]
+	gpgsign = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[rerere]
+	enabled = true
+[core]
+	excludesFile = ./ignore

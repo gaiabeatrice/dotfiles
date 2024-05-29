@@ -1,0 +1,30 @@
+session: PORTAL
+root: ~/pdq/portal
+
+before_start: 
+  - docker-compose --project-directory ../devops/local-dev --profile portal up -d 
+  - docker-compose up -d
+
+stop:
+  - docker-compose --project-directory ../devops/local-dev stop
+  - docker-compose stop
+
+windows:
+  - name: " "
+    commands:
+      - nvim
+  - name: " "
+    commands: 
+      - nvim gaiapad
+    layout: main-horizontal
+    panes:
+      - type: horizontal
+        commands:
+          - iex -S mix
+      
+  # - name: " "
+  #   commands:
+  #     - nvim +DBUI
+  # - name: "󱈫 "
+  #   commands:
+  #     - clear
