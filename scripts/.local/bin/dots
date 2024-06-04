@@ -1,8 +1,16 @@
 #!/bin/sh
 
-cd ~/dotfiles/
-case $1 in
-  install) brew bundle;;
-  config) stow */ --no-folding;;
-  *) brew bundle; stow */ --no-folding;;
+echo "What do you want to do?"
+CHOICE=$(gum choose "dump" "install" "config")
+
+case $CHOICE in
+  dump) 
+    echo "Dumping brew configuration in Brewfile"
+    brew bundle dump -f;;
+  install)
+    echo "Installing packages with brew"
+    brew bundle;;
+  config)
+    echo "Stowing your shit"
+    stow */ --no-folding;;
 esac
