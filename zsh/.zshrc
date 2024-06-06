@@ -79,7 +79,7 @@ bindkey -v
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git vi-mode elixir fzf-tab)
 
-cdpath=(. "$HOME" "$HOME/.config" "$HOME/pdq")
+cdpath=(. "$HOME" "$HOME/.config" "$HOME/pdq" "$HOME/elixir" "$HOME/go")
 
 source $ZSH/oh-my-zsh.sh
 source <(fzf --zsh)

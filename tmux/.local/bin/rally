@@ -1,7 +1,7 @@
 #!/bin/sh
 
 set -eu
-TARGET=$(ls -d ~/pdq/* ~/* ~/.config/* | fzf --header-first --header="Launch Project" --preview "eza --color=always --tree --icons --level 3 --git-ignore {}")
+TARGET=$(ls -d ~/pdq/* ~/dotfiles ~/go/* ~/elixir/* | fzf --header-first --header="Launch Project" --preview "eza --color=always --tree --icons --level 3 --git-ignore {}")
 NAME=$(basename $TARGET)
 SESSION_NAME=$(echo $NAME | tr [:lower:] [:upper:])
 
