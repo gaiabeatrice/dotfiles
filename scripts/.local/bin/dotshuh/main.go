@@ -1,11 +1,14 @@
 package main
 
 import (
+	"bufio"
+	"fmt"
 	"log"
 	"os/exec"
+	"strings"
 
 	"github.com/charmbracelet/huh"
-	"github.com/charmbracelet/huh/spinner"
+	"github.com/charmbracelet/lipgloss"
 )
 
 type Action int
@@ -18,6 +21,7 @@ const (
 )
 
 var theme *huh.Theme = huh.ThemeCatppuccin()
+var highlightColor = theme.Focused.FocusedButton.GetBackground()
 
 func main() {
 	var action Action
@@ -43,30 +47,42 @@ func main() {
 
 	switch action {
 	case BrewDump:
-		action := func() {
-			execCommand("brew", []string{"bundle", "dump", "-f"})
-		}
-		spinner.New().Title("Running brew bundle dump -f").Action(action).Run()
+		execCommand("brew", []string{"bundle", "dump", "-f"})
 	case BrewInstall:
-		action := func() {
-			execCommand("brew", []string{"bundle"})
-		}
-		spinner.New().Title("Running brew bundle").Action(action).Run()
+		execCommand("brew", []string{"bundle"})
 	case Stow:
-		action := func() {
-			execCommand("stow", []string{"*/", "--no-folding"})
-		}
-		spinner.New().Title("Running stow */ --no-folding").Action(action).Run()
+		execCommand("stow", []string{"*/", "--no-folding"})
 	}
 }
 
 func execCommand(name string, args []string) string {
 	cmd := exec.Command(name, args...)
 
-	err := cmd.Run()
+	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 	}
+
+	err = cmd.Start()
+
+	runningCommandMessage :=
+		lipgloss.NewStyle().
+			Bold(true).
+			Foreground(highlightColor).
+			SetString("Running command:")
+
+	fmt.Println(runningCommandMessage, name, strings.Join(args, " "))
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	scanner := bufio.NewScanner(stdout)
+	for scanner.Scan() {
+		m := scanner.Text()
+		fmt.Println(m)
+	}
+	cmd.Wait()
 
 	return "success"
 }
