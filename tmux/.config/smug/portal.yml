@@ -21,10 +21,9 @@ windows:
       - type: horizontal
         commands:
           - iex -S mix
-      
-  # - name: " "
-  #   commands:
-  #     - nvim +DBUI
+  - name: " "
+    commands:
+      - nvim +DBUI
   # - name: "󱈫 "
   #   commands:
   #     - clear
