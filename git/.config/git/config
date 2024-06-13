@@ -10,3 +10,5 @@
 	required = true
 [rerere]
 	enabled = true
+[status]
+	showUntrackedFiles = all
