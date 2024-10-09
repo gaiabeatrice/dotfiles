@@ -1,8 +1,9 @@
-session: PORTAL
-root: ~/pdq/portal
+session: HOUSTON
+root: ~/pdq/houston
 
 before_start: 
-  - docker compose --project-directory ../devops/local-dev --profile portal up -d 
+  - ../devops/local-dev/update-dev-secrets.sh
+  - docker compose --project-directory ../devops/local-dev --profile houston up -d 
   - docker compose up -d
 
 stop:
@@ -20,7 +21,7 @@ windows:
     panes:
       - type: horizontal
         commands:
-          - iex -S mix
+          - mix start
   - name: " "
     commands:
       - nvim +DBUI

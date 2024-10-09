@@ -17,3 +17,8 @@ end
 
 require "lazy_setup"
 require "polish"
+
+-- local window_group = vim.api.nvim_create_augroup("WindowGroup", { clear = true })
+--
+-- -- even out any splits when vim window is resized
+-- vim.api.nvim_create_autocmd("VimResized", { pattern = "*", group = window_group, command = [[exe "normal! \<c-w>=" ]] })
